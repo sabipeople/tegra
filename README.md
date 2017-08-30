@@ -39,6 +39,18 @@ tensorRT
 	properties: 
 		-use network parameter from caffe and change the parameter to int8 , float16 so that user can reduce the inference time
 	
+inference : 
+	1. download pretrained model
+	2. unzip tar.gz(model zip file) in the proper folder
+	3. set env_var=/path/to/unzip/file
+	4. deploy.prototxt -> forward network architecture, 
+		original.prototxt -> original training network architecture
+		deploy.prototxt->forward network architecture                         
+		snapshot_iter_22620.caffemodel -> weight matrix
+		info.json                               
+		solver.prototxt -> 
+		mean.binaryproto   -> mean image used in training phase                      
+		train_val.prototxt -> 
 
 ---------------------------------------------------------------------
 
