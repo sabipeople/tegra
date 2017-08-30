@@ -1,0 +1,12 @@
+ball
+bear
+bike
+bird
+bottle
+cat
+dog
+fish
+fruit
+sign
+turtle
+vehicle

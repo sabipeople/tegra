@@ -1,0 +1,26 @@
+{
+    "caffe flavor": "NVIDIA",
+    "caffe version": "0.15.13",
+    "creation time": "2017-08-29 15:33:43.641390",
+    "dataset_id": "20170829-145642-be81",
+    "deploy file": "deploy.prototxt",
+    "digits version": "6.0.0-rc.1",
+    "framework": "caffe",
+    "id": "20170829-153343-ae85",
+    "image dimensions": [
+        256,
+        256,
+        3
+    ],
+    "image resize mode": "squash",
+    "job id": "20170829-153343-ae85",
+    "labels file": "labels.txt",
+    "mean file": "mean.binaryproto",
+    "model file": "original.prototxt",
+    "name": "GoogleNet-ILSVRC12-subset",
+    "snapshot file": "snapshot_iter_48060.caffemodel",
+    "solver file": "solver.prototxt",
+    "status": "Done",
+    "train_val file": "train_val.prototxt",
+    "username": "dkkim"
+}

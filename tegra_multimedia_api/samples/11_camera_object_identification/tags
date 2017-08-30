@@ -1,0 +1,149 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+APP	Makefile	/^APP := camera_caffe$/;"	m
+ARGUS_UTILS_DIR	Makefile	/^ARGUS_UTILS_DIR := ..\/..\/argus\/samples\/utils$/;"	m
+Argmax	opencv_consumer_lib/Classifier.cpp	/^static std::vector<int> Argmax(const std::vector<float>& v, int N) {$/;"	f	file:
+ArgusSamples	camera_caffe_main.cpp	/^namespace ArgusSamples$/;"	n	file:
+CAFFE_DIR	opencv_consumer_lib/Makefile	/^CAFFE_DIR:=\/home\/ubuntu\/Work\/caffe$/;"	m
+CAPTURE_TIME	camera_caffe_main.cpp	/^static int          CAPTURE_TIME = 30; \/\/ In seconds.$/;"	v	file:
+CC	opencv_consumer_lib/Makefile	/^CC=g++$/;"	m
+CHECK_ERROR	camera_caffe_main.cpp	46;"	d	file:
+CHECK_OPTION_VALUE	camera_caffe_csvparser.cpp	35;"	d	file:
+CLASS_DIR	Makefile	/^CLASS_DIR := ..\/common\/classes$/;"	m
+CLASS_OBJS	Makefile	/^CLASS_OBJS := $(CLASS_SRCS:.cpp=.o)$/;"	m
+CLASS_SRCS	Makefile	/^CLASS_SRCS := $(wildcard $(CLASS_DIR)\/*.cpp)$/;"	m
+CONSUMER_PRINT	camera_caffe_main.cpp	45;"	d	file:
+CSV_PARSE_CHECK_ERROR	camera_caffe_csvparser.cpp	42;"	d	file:
+CUDA_DIR	opencv_consumer_lib/Makefile	/^CUDA_DIR:=\/usr\/local\/cuda$/;"	m
+Classifier	opencv_consumer_lib/Classifier.cpp	/^Classifier::Classifier(const string& model_file,$/;"	f	class:Classifier
+Classifier	opencv_consumer_lib/Classifier.h	/^class Classifier {$/;"	c
+Classify	opencv_consumer_lib/Classifier.cpp	/^std::vector<Prediction> Classifier::Classify(const cv::Mat& img, int N) {$/;"	f	class:Classifier
+ConsumerThread	camera_caffe_main.cpp	/^ConsumerThread::ConsumerThread(OutputStream* stream) :$/;"	f	class:ArgusSamples::ConsumerThread
+ConsumerThread	camera_caffe_main.cpp	/^class ConsumerThread : public Thread$/;"	c	namespace:ArgusSamples	file:
+DEFAULT_FPS	camera_caffe_main.cpp	37;"	d	file:
+DO_STAT	camera_caffe_main.cpp	/^static bool         DO_STAT = false;$/;"	v	file:
+FRAME_CONVERTER_BUF_NUMBER	camera_caffe_main.h	53;"	d
+LIB_OBJS	opencv_consumer_lib/Makefile	/^LIB_OBJS=$(LIB_SRCS:.cpp=.o)$/;"	m
+LIB_SRCS	opencv_consumer_lib/Makefile	/^LIB_SRCS=opencv_consumer.cpp Classifier.cpp$/;"	m
+MAX_PENDING_FRAMES	camera_caffe_main.cpp	36;"	d	file:
+OBJS	Makefile	/^OBJS := $(SRCS:.cpp=.o)$/;"	m
+OPENCV_CONSUMER_CONFIG_CAFFE_LABELFILE	opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_CAFFE_LABELFILE,$/;"	e	enum:__anon2
+OPENCV_CONSUMER_CONFIG_CAFFE_LABELFILE	opencv_consumer_lib/opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_CAFFE_LABELFILE,$/;"	e	enum:__anon1
+OPENCV_CONSUMER_CONFIG_CAFFE_MEANFILE	opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_CAFFE_MEANFILE,$/;"	e	enum:__anon2
+OPENCV_CONSUMER_CONFIG_CAFFE_MEANFILE	opencv_consumer_lib/opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_CAFFE_MEANFILE,$/;"	e	enum:__anon1
+OPENCV_CONSUMER_CONFIG_CAFFE_MODELFILE	opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_CAFFE_MODELFILE,$/;"	e	enum:__anon2
+OPENCV_CONSUMER_CONFIG_CAFFE_MODELFILE	opencv_consumer_lib/opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_CAFFE_MODELFILE,$/;"	e	enum:__anon1
+OPENCV_CONSUMER_CONFIG_CAFFE_TRAINEDFILE	opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_CAFFE_TRAINEDFILE,$/;"	e	enum:__anon2
+OPENCV_CONSUMER_CONFIG_CAFFE_TRAINEDFILE	opencv_consumer_lib/opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_CAFFE_TRAINEDFILE,$/;"	e	enum:__anon1
+OPENCV_CONSUMER_CONFIG_IMGHEIGHT	opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_IMGHEIGHT,$/;"	e	enum:__anon2
+OPENCV_CONSUMER_CONFIG_IMGHEIGHT	opencv_consumer_lib/opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_IMGHEIGHT,$/;"	e	enum:__anon1
+OPENCV_CONSUMER_CONFIG_IMGWIDTH	opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_IMGWIDTH = 0,$/;"	e	enum:__anon2
+OPENCV_CONSUMER_CONFIG_IMGWIDTH	opencv_consumer_lib/opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_IMGWIDTH = 0,$/;"	e	enum:__anon1
+OPENCV_CONSUMER_CONFIG_START	opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_START$/;"	e	enum:__anon2
+OPENCV_CONSUMER_CONFIG_START	opencv_consumer_lib/opencv_consumer_interface.h	/^    OPENCV_CONSUMER_CONFIG_START$/;"	e	enum:__anon1
+OPENCV_HANDLER_CLOSE_ENTRY	opencv_consumer_interface.h	34;"	d
+OPENCV_HANDLER_CLOSE_ENTRY	opencv_consumer_lib/opencv_consumer_interface.h	34;"	d
+OPENCV_HANDLER_OPEN_ENTRY	opencv_consumer_interface.h	32;"	d
+OPENCV_HANDLER_OPEN_ENTRY	opencv_consumer_lib/opencv_consumer_interface.h	32;"	d
+OPENCV_IMG_PROCESSING_ENTRY	opencv_consumer_interface.h	36;"	d
+OPENCV_IMG_PROCESSING_ENTRY	opencv_consumer_lib/opencv_consumer_interface.h	36;"	d
+OPENCV_SET_CONFIG_ENTRY	opencv_consumer_interface.h	38;"	d
+OPENCV_SET_CONFIG_ENTRY	opencv_consumer_lib/opencv_consumer_interface.h	38;"	d
+PRODUCER_PRINT	camera_caffe_main.cpp	44;"	d	file:
+PairCompare	opencv_consumer_lib/Classifier.cpp	/^static bool PairCompare(const std::pair<float, int>& lhs,$/;"	f	file:
+Predict	opencv_consumer_lib/Classifier.cpp	/^std::vector<float> Classifier::Predict(const cv::Mat& img) {$/;"	f	class:Classifier
+Prediction	opencv_consumer_lib/Classifier.h	/^typedef std::pair<string, float> Prediction;$/;"	t
+Preprocess	opencv_consumer_lib/Classifier.cpp	/^void Classifier::Preprocess(const cv::Mat& img,$/;"	f	class:Classifier
+SRCS	Makefile	/^SRCS := \\$/;"	m
+SetMean	opencv_consumer_lib/Classifier.cpp	/^void Classifier::SetMean(const string& mean_file) {$/;"	f	class:Classifier
+TARGET_LIB	opencv_consumer_lib/Makefile	/^TARGET_LIB=libopencv_consumer.so$/;"	m
+WrapInputLayer	opencv_consumer_lib/Classifier.cpp	/^void Classifier::WrapInputLayer(std::vector<cv::Mat>* input_channels) {$/;"	f	class:Classifier
+_CAMERA_CAFFE_MAIN_H	camera_caffe_main.h	30;"	d
+_OPENCV_CONSUMER_INTERFACE_H	opencv_consumer_interface.h	30;"	d
+_OPENCV_CONSUMER_INTERFACE_H	opencv_consumer_lib/opencv_consumer_interface.h	30;"	d
+_camera_caffe_context_t	camera_caffe_main.h	/^typedef struct _camera_caffe_context_t {$/;"	s
+abort	camera_caffe_main.cpp	/^void ConsumerThread::abort()$/;"	f	class:ArgusSamples::ConsumerThread
+camera_caffe_context	camera_caffe_main.h	/^} camera_caffe_context;$/;"	t	typeref:struct:_camera_caffe_context_t
+classifier	opencv_consumer_lib/opencv_consumer.cpp	/^    Classifier *classifier;$/;"	m	struct:opencv_sample_handler	file:
+conv_buf_num	camera_caffe_main.cpp	/^    int conv_buf_num;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+converterCapturePlaneDqCallback	camera_caffe_main.cpp	/^bool ConsumerThread::converterCapturePlaneDqCallback($/;"	f	class:ArgusSamples::ConsumerThread
+converterOutputPlaneDqCallback	camera_caffe_main.cpp	/^bool ConsumerThread::converterOutputPlaneDqCallback($/;"	f	class:ArgusSamples::ConsumerThread
+createImageConverter	camera_caffe_main.cpp	/^bool ConsumerThread::createImageConverter()$/;"	f	class:ArgusSamples::ConsumerThread
+ctx	camera_caffe_main.cpp	/^static camera_caffe_context ctx;$/;"	v	file:
+deinit_ctx	camera_caffe_main.cpp	/^static void deinit_ctx(camera_caffe_context *p_ctx)$/;"	f	file:
+detecting_mat	opencv_consumer_lib/opencv_consumer.cpp	/^    cv::Mat detecting_mat;$/;"	m	struct:opencv_sample_handler	file:
+detector_busy	opencv_consumer_lib/opencv_consumer.cpp	/^    volatile int detector_busy;$/;"	m	struct:opencv_sample_handler	file:
+detector_quit_flag	opencv_consumer_lib/opencv_consumer.cpp	/^    volatile int detector_quit_flag;$/;"	m	struct:opencv_sample_handler	file:
+detector_thread	opencv_consumer_lib/opencv_consumer.cpp	/^    pthread_t detector_thread;$/;"	m	struct:opencv_sample_handler	file:
+detector_thread_entry	opencv_consumer_lib/opencv_consumer.cpp	/^detector_thread_entry(void *arg)$/;"	f	file:
+execute	camera_caffe_main.cpp	/^static bool execute(camera_caffe_context *p_ctx)$/;"	f	namespace:ArgusSamples
+first_prob	opencv_consumer_lib/opencv_consumer.cpp	/^    float first_prob;$/;"	m	struct:opencv_sample_handler	file:
+first_result	opencv_consumer_lib/opencv_consumer.cpp	/^    char first_result[4096];$/;"	m	struct:opencv_sample_handler	file:
+height	camera_caffe_main.h	/^    int height;$/;"	m	struct:_camera_caffe_context_t
+height	opencv_consumer_lib/opencv_consumer.cpp	/^    int height;$/;"	m	struct:opencv_sample_handler	file:
+init_ctx	camera_caffe_main.cpp	/^static int init_ctx(camera_caffe_context *p_ctx)$/;"	f	file:
+input_geometry_	opencv_consumer_lib/Classifier.h	/^  cv::Size input_geometry_;$/;"	m	class:Classifier
+isInError	camera_caffe_main.cpp	/^    bool isInError()$/;"	f	class:ArgusSamples::ConsumerThread
+label_file	camera_caffe_main.h	/^    char *label_file;$/;"	m	struct:_camera_caffe_context_t
+label_file	opencv_consumer_lib/opencv_consumer.cpp	/^    string *label_file;$/;"	m	struct:opencv_sample_handler	file:
+labels_	opencv_consumer_lib/Classifier.h	/^  std::vector<string> labels_;$/;"	m	class:Classifier
+lib_file	camera_caffe_main.h	/^    char *lib_file;$/;"	m	struct:_camera_caffe_context_t
+lib_handler	camera_caffe_main.h	/^    void *lib_handler;$/;"	m	struct:_camera_caffe_context_t
+m_ConvOutputPlaneBufQueue	camera_caffe_main.cpp	/^    std::queue < NvBuffer * > *m_ConvOutputPlaneBufQueue;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+m_ImageConverter	camera_caffe_main.cpp	/^    NvVideoConverter *m_ImageConverter;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+m_consumer	camera_caffe_main.cpp	/^    UniqueObj<FrameConsumer> m_consumer;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+m_gotError	camera_caffe_main.cpp	/^    bool m_gotError;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+m_numPendingFrames	camera_caffe_main.cpp	/^    int m_numPendingFrames;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+m_pContext	camera_caffe_main.cpp	/^    camera_caffe_context *m_pContext;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+m_queueCond	camera_caffe_main.cpp	/^    pthread_cond_t m_queueCond;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+m_queueLock	camera_caffe_main.cpp	/^    pthread_mutex_t m_queueLock;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+m_stream	camera_caffe_main.cpp	/^    OutputStream* m_stream;$/;"	m	class:ArgusSamples::ConsumerThread	file:
+main	camera_caffe_main.cpp	/^int main(int argc, const char *argv[])$/;"	f
+matPrint	opencv_consumer_lib/opencv_consumer.cpp	/^matPrint(Mat &img, int lineOffsY, Scalar fontColor, const string &ss)$/;"	f	file:
+mean_	opencv_consumer_lib/Classifier.h	/^  cv::Mat mean_;$/;"	m	class:Classifier
+mean_file	camera_caffe_main.h	/^    char *mean_file;$/;"	m	struct:_camera_caffe_context_t
+mean_file	opencv_consumer_lib/opencv_consumer.cpp	/^    string *mean_file;$/;"	m	struct:opencv_sample_handler	file:
+milliseconds	opencv_consumer_lib/opencv_consumer.cpp	/^    long milliseconds;$/;"	m	struct:opencv_sample_handler	file:
+model_file	camera_caffe_main.h	/^    char *model_file;$/;"	m	struct:_camera_caffe_context_t
+model_file	opencv_consumer_lib/opencv_consumer.cpp	/^    string *model_file;$/;"	m	struct:opencv_sample_handler	file:
+net_	opencv_consumer_lib/Classifier.h	/^  shared_ptr<Net<float> > net_;$/;"	m	class:Classifier
+num_channels_	opencv_consumer_lib/Classifier.h	/^  int num_channels_;$/;"	m	class:Classifier
+opencv_handler	camera_caffe_main.h	/^    void *opencv_handler;$/;"	m	struct:_camera_caffe_context_t
+opencv_handler_close	camera_caffe_main.h	/^    opencv_handler_close_t opencv_handler_close;$/;"	m	struct:_camera_caffe_context_t
+opencv_handler_close	opencv_consumer_lib/opencv_consumer.cpp	/^opencv_handler_close(void *opencv_handler)$/;"	f
+opencv_handler_close_t	opencv_consumer_interface.h	/^typedef void (*opencv_handler_close_t) (void *);$/;"	t
+opencv_handler_close_t	opencv_consumer_lib/opencv_consumer_interface.h	/^typedef void (*opencv_handler_close_t) (void *);$/;"	t
+opencv_handler_open	camera_caffe_main.h	/^    opencv_handler_open_t opencv_handler_open;$/;"	m	struct:_camera_caffe_context_t
+opencv_handler_open	opencv_consumer_lib/opencv_consumer.cpp	/^opencv_handler_open(void)$/;"	f
+opencv_handler_open_t	opencv_consumer_interface.h	/^typedef void *(*opencv_handler_open_t) (void);$/;"	t
+opencv_handler_open_t	opencv_consumer_lib/opencv_consumer_interface.h	/^typedef void *(*opencv_handler_open_t) (void);$/;"	t
+opencv_img_processing	camera_caffe_main.h	/^    opencv_img_processing_t opencv_img_processing;$/;"	m	struct:_camera_caffe_context_t
+opencv_img_processing	opencv_consumer_lib/opencv_consumer.cpp	/^opencv_img_processing(void *opencv_handler, uint8_t *pdata, int32_t width, int32_t height)$/;"	f
+opencv_img_processing_t	opencv_consumer_interface.h	/^typedef void (*opencv_img_processing_t) (void *, const uint8_t *, int32_t, int32_t);$/;"	t
+opencv_img_processing_t	opencv_consumer_lib/opencv_consumer_interface.h	/^typedef void (*opencv_img_processing_t) (void *, const uint8_t *, int32_t, int32_t);$/;"	t
+opencv_sample_handler	opencv_consumer_lib/opencv_consumer.cpp	/^struct opencv_sample_handler$/;"	s	file:
+opencv_set_config	camera_caffe_main.h	/^    opencv_set_config_t opencv_set_config;$/;"	m	struct:_camera_caffe_context_t
+opencv_set_config	opencv_consumer_lib/opencv_consumer.cpp	/^opencv_set_config(void *opencv_handler, int config_id, void *arg)$/;"	f
+opencv_set_config_t	opencv_consumer_interface.h	/^typedef void (*opencv_set_config_t) (void *, int, void *);$/;"	t
+opencv_set_config_t	opencv_consumer_lib/opencv_consumer_interface.h	/^typedef void (*opencv_set_config_t) (void *, int, void *);$/;"	t
+parse_csv_args	camera_caffe_csvparser.cpp	/^int parse_csv_args(camera_caffe_context *ctx, int argc, const char *argv[])$/;"	f
+predictions	opencv_consumer_lib/opencv_consumer.cpp	/^    std::vector<Prediction> predictions;$/;"	m	struct:opencv_sample_handler	file:
+print_help	camera_caffe_csvparser.cpp	/^static void print_help(const char *app_name)$/;"	f	file:
+result_update_flag	opencv_consumer_lib/opencv_consumer.cpp	/^    volatile int result_update_flag;$/;"	m	struct:opencv_sample_handler	file:
+second_prob	opencv_consumer_lib/opencv_consumer.cpp	/^    float second_prob;$/;"	m	struct:opencv_sample_handler	file:
+second_result	opencv_consumer_lib/opencv_consumer.cpp	/^    char second_result[4096];$/;"	m	struct:opencv_sample_handler	file:
+set_default	camera_caffe_main.cpp	/^static void set_default(camera_caffe_context *p_ctx)$/;"	f	file:
+threadExecute	camera_caffe_main.cpp	/^bool ConsumerThread::threadExecute()$/;"	f	class:ArgusSamples::ConsumerThread
+threadInitialize	camera_caffe_main.cpp	/^bool ConsumerThread::threadInitialize()$/;"	f	class:ArgusSamples::ConsumerThread
+threadShutdown	camera_caffe_main.cpp	/^bool ConsumerThread::threadShutdown()$/;"	f	class:ArgusSamples::ConsumerThread
+thread_id	camera_caffe_main.h	/^    pthread_t thread_id;$/;"	m	struct:_camera_caffe_context_t
+trained_file	camera_caffe_main.h	/^    char *trained_file;$/;"	m	struct:_camera_caffe_context_t
+trained_file	opencv_consumer_lib/opencv_consumer.cpp	/^    string *trained_file;$/;"	m	struct:opencv_sample_handler	file:
+width	camera_caffe_main.h	/^    int width;$/;"	m	struct:_camera_caffe_context_t
+width	opencv_consumer_lib/opencv_consumer.cpp	/^    int width;$/;"	m	struct:opencv_sample_handler	file:
+writeFrameToOpencvConsumer	camera_caffe_main.cpp	/^void ConsumerThread::writeFrameToOpencvConsumer($/;"	f	class:ArgusSamples::ConsumerThread
+~ConsumerThread	camera_caffe_main.cpp	/^ConsumerThread::~ConsumerThread()$/;"	f	class:ArgusSamples::ConsumerThread
