@@ -1,0 +1,233 @@
+import numpy as np
+import pdb
+import os
+import sys
+sys.path.append(os.getcwd())
+import calib_util as cu
+
+def validateH(k,H):
+    print("\n\n\n")
+    Rt=k.getI()*H
+    #make H
+    R2=np.matrix(np.zeros((3,3)))
+    scaled_H=Rt/((np.linalg.norm(Rt[:,0])+np.linalg.norm(Rt[:,1]))/2)
+    R2[:,0]=scaled_H[:,0]
+    R2[:,1]=np.matrix(np.cross(scaled_H[:,0].getT(),scaled_H[:,1].getT())).getT()
+    R2[:,2]=scaled_H[:,1]
+    #get rotation degree 
+    det=np.linalg.det(R2)
+    if det<0:
+        R2[:,1]=-R2[:,1]
+    print("R2=\n",R2)
+    x,y,z=cu.decomposeRot_ZYX(R2)
+    print("x=%f,y=%f,z=%f"%(x,y,z))
+    
+    RT=np.matrix(np.zeros((3,4)))
+    RT[:,[0,1,2]]=R2
+    RT[:,3]=scaled_H[:,2]
+    print("RT=\n",RT)
+    print("det(R2):", np.linalg.det(R2))
+    print("T=\n", -R2.getI()*scaled_H[:,2])
+
+def getCov(x,mx):
+    '''
+    return covariance matrix of two given vector
+    '''
+    try:
+        assert x.shape == mx.shape, 'in getCov shape of x(first paramter) is not 4'
+        x_mx=x-mx
+        cov=x_mx.reshape(-1,1)*x_mx.reshape(1,-1)
+        return cov
+    except AssertionError as e:
+        print(e)
+
+def getError(X,eX):
+    inv_cov=np.linalg.inv(np.cov(X))
+    e=X-eX
+    E=0
+    for ei in e.transpose():
+        E+=np.dot(np.dot(ei,inv_cov),ei.reshape(4,-1))
+    
+    return E
+    
+
+def do_LM(pw,pi,H,lm_factor):
+    '''
+    pw,pi should be homogenious coordinate
+    '''    
+    inv_H=np.linalg.inv(H)
+    epx=np.dot(inv_H,pi)
+    epx/=epx[2,:]
+    num_pt=pw.shape[1]
+    X=np.zeros(shape=(4,num_pt))
+    X[0:2,:]=pw[0:2,:]
+    X[2:4,:]=pi[0:2,:]
+    eX=np.zeros(shape=(4,num_pt))
+    epi=np.dot(H,epx)
+    epi/=epi[2,:]
+    eX[0:2,:]=epx[0:2,:]
+    eX[2:4,:]=epi[0:2,:]
+    mean_X=X.mean(axis=1)
+
+    old_error=getError(X,eX)
+    first_error=getError(X,eX)
+    origin_H=H
+    e=np.zeros(shape=(num_pt,4,1))
+    e=X-eX
+    for j in range(50):
+        #compute estimate point in image
+        eB=np.zeros(shape=(num_pt, 2,1))
+        B=np.zeros(shape=(num_pt, 4,2))
+        inv_V_star=np.zeros(shape=(num_pt, 2,2))
+        V=np.zeros(shape=(num_pt, 2,2))
+        W=np.zeros(shape=(num_pt, 9,2))
+        Y=np.zeros(shape=(num_pt, 9,2))
+        for i in range(num_pt):
+            #compute partial block J=[A|B], h, errorA, errorB etc
+            eA=np.zeros(shape=(9,1))
+            A=np.zeros(shape=(4,9))
+            B[i,0,0]=1
+            B[i,1,1]=1
+            U=np.zeros(shape=(9,9))
+            tmpu=np.zeros(shape=(9,9))
+            tmpv=np.zeros(shape=(2,2))
+            b_cov=np.zeros(shape=(2,4))
+            a_cov=np.zeros(shape=(9,4))
+            YeB=np.zeros(shape=(9,1))
+            YW=np.zeros(shape=(9,9))
+            #compute partial blocks
+            #compute error
+            
+            A[2,0:2]=eX[0:2,i]
+            A[2,2]=1
+            A[2,6:8]=-eX[0:2,i]*eX[2,i]
+            A[2,8]=-eX[2,i]
+            A[3,3:5]=eX[0:2,i]
+            A[3,5]=1
+            A[3,6:8]=-eX[0:2,i]*eX[3,i]
+            A[3,8]=-eX[3,i]
+           # B[i,2,:]=H[0,0:2]
+           # B[i,3,:]=H[1,0:2]
+            B[i,2,0]=H[0,0]+(-H[2,0]*eX[2,i])
+            B[i,2,1]=H[0,1]+(-H[2,1]*eX[2,i])
+            B[i,3,0]=H[1,0]+(-H[2,0]*eX[3,i])
+            B[i,3,1]=H[1,1]+(-H[2,1]*eX[3,i])
+            
+            #compute U0
+            cov_x=getCov(eX[:,i],mean_X)
+            inv_cov_x=np.linalg.inv(cov_x)
+            a_cov=np.dot(A.transpose(), inv_cov_x)
+            b_cov=np.dot(B[i,:,:].transpose(), inv_cov_x)
+            U+=np.dot(a_cov,A)
+            V[i,:,:]=np.dot(b_cov, B[i,:,:])
+            inv_V_star[i,:,:]=np.linalg.inv(V[i,:,:]+lm_factor*np.diagflat(np.diag(V[i,:,:])))
+            W[i,:,:]=np.dot(a_cov, B[i,:,:])
+            eA+=np.dot(a_cov,e[:,i].reshape(4,1))
+            eB[i,:,:]=np.dot(b_cov,e[:,i].reshape(4,1))
+            Y[i,:,:]=np.dot(W[i,:,:],inv_V_star[i,:,:]).reshape(Y[i].shape)
+            YeB+=np.dot(Y[i,:,:],eB[i,:,:]).reshape(YeB.shape)
+            YW+=np.dot(Y[i,:,:],W[i,:,:].transpose()).reshape(YW.shape)
+        #compute compensation
+        U_star=U+lm_factor*np.diagflat(np.diag(U))
+        J=U_star-YW
+        E=eA-YeB
+        delta_A=np.dot(np.linalg.inv(J),E)
+        delta_B=np.zeros(shape=(2,num_pt))
+        new_eX=np.zeros(shape=X.shape)
+        new_epx=np.ones(shape=epx.shape)
+        new_H=H+delta_A.reshape(3,3)
+        for i in range(num_pt):
+            tmp=eB[i,:,:]-np.dot(W[i,:,:].transpose(),delta_A).reshape(eB[i].shape)
+            delta_B[:,i]=np.dot(inv_V_star[i,:,:],tmp).reshape(-1)
+            new_epx[0:2,i]=(epx[0:2,i].reshape(-1)+delta_B[:,i])
+            new_eX[0:2,i]=new_epx[0:2,i]
+            tmp_reproX=np.dot(new_H,new_epx[:,i]).reshape(-1)
+            tmp_reproX/=tmp_reproX[0,2]
+            new_eX[2:4,i]=tmp_reproX[0,0:2]
+            '''
+            print("X:\n",X[:,i])
+            print("eX:\n",eX[:,i])
+            print("new_eX:\n", new_eX[:,i])
+            '''
+        new_error=getError(X,new_eX)
+        if old_error>new_error:
+            eX=new_eX
+            H=new_H
+            e=X-eX
+            old_error=new_error
+            lm_factor/=10
+        else:
+            lm_factor*=10
+        print("-"*30)
+        print("iter : ", j)
+        print("old error: ", old_error)
+        print("new error: ", new_error)
+        print("first error: ", first_error)
+        if j %20 ==0:
+            print("X:\n",X[:,0])
+            print("eX:\n",eX[:,0])
+            print("new_eX:\n", new_eX[:,0])
+#            pdb.set_trace()
+
+    return H
+
+
+            
+
+#pw=np.matrix('-50,100,50,-50,-100,50;2270,2020,1870,1670,1520,1420;0,0,0,0,0,0')
+#pi=np.matrix('190,241,226,195,180,229;11,94,146,211,261,292')
+ipw=np.matrix('-100, -50, 0, 100,-50, 0,50,-50,0, 50, -50,0, 50,-50, 0, 50, -50, 0, 100,-50,0, 50,-50, 0, 50,-50, 0, 50,-50, 0, 50, -100, 0, 50,-50, 0, 50, -50, 0, 50, -50, 0, 50, -50,  0,50, -100, 0,50,-50,  0, 50,-50,0, 50, -100, 0;\
+2970, 2970, 2970, 2970 ,2970,  2970 ,2970 ,2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970,\
+2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970, 2970;1690, 1690, 1690, 1690 ,1640,  1640 ,1640 ,1590, 1590, 1590, 1540, 1540, 1540, 1490, 1490, 1490, 1440, 1440, 1440, 1390, 1390,\
+1390, 1340, 1340, 1340, 1290, 1290, 1290, 1240, 1240, 1240, 1190, 1190, 1190, 1140, 1140, 1140, 1090, 1090, 1090, 1040, 1040, 1040,  990,  990,  990,  940,  940,  940,  890,  890,  890,  840,  840,  840,  790, 790  ')
+ipi=np.matrix('568, 583, 601, 633, 583, 601, 617, 583, 601, 617, 583, 601, 617, 583, 600, 617, 583, 601, 633, 583, 600, 616, 583, 600 ,616 ,583, 600, 616, 583 ,600, 616, 567 ,599, 616, 583, 599, 616, 583, 599, 615 ,583, 599, 615, 583,\
+599, 615 ,566, 599, 615 ,582, 599, 615, 582, 599, 615, 566, 598 ; 180, 180, 180, 180, 196, 196, 196, 213, 213, 213, 229, 229, 229, 246, 246, 246, 262, 262, 262, 280, 280, 280, 296, 296, 296, 313, 313, 313, 329, 329, 329, 345, 345, 346,\
+363, 363, 362, 379, 379, 380, 396, 396, 395, 412, 412, 413, 429, 429, 429, 445, 445, 446, 462, 462, 462, 478, 478 ')
+#ipw=np.matrix('347.73728813559319,347.73728813559319,286.72033898305085,286.72033898305085;174.54237288135593,391.49152542372883,391.49152542372883,174.54237288135593;0,0,0,0')
+#ipi=np.matrix('-1.8837610798398172,0.55002616955759809,1.063767572313474,-3.7163988031549366;-0.23444051132700833,0.28719925106226513,-0.042857914818657979,-1.8794606494155641')
+pw=ipw
+pi=ipi
+print(pw)
+print(pi)
+
+k=np.matrix('1558.31138,0,691.85850;0,1566.56679,386.99109;0,0,1')
+
+H,num_inlier,inlier_idx, outlier_idx, L2Error_vec=cu.findHomography(pw.A,pi.A,4,10,0)
+print("inlier num=", num_inlier)
+print("inlier_idx=", inlier_idx)
+print("inlier_Error=", L2Error_vec[inlier_idx])
+print("outliner_idx=", outlier_idx)
+print("outlier_Error=", L2Error_vec[outlier_idx])
+print("original H\n", H)
+#inlier_idx=[0,1,2,3,4]
+cu.isInGeneralPosition(cu.toHomo(ipw[:,inlier_idx])[[0,2,3],:],True,100)
+#convert image point to camera coordinate frame point
+#homo_pi=cu.toHomo(pi[:,inlier_idx])
+#p_cam=np.dot(np.linalg.inv(k),homo_pi)
+#normalize pw, pcam
+#n_pw,mean_pw, scale_w=cu.normalization(pw[:,inlier_idx])
+#n_pcam,mean_pcam, scale_cam=cu.normalization(p_cam[0:2])
+#norm_mat_w=np.matrix([[scale_w,0,-mean_pw[0]*scale_w],[0,scale_w,-scale_w*mean_pw[1]],[0,0,1]])
+#norm_mat_cam=np.matrix([[scale_cam,0,-mean_pcam[0]*scale_cam],[0,scale_cam,-scale_cam*mean_pcam[1]],[0,0,1]])
+
+
+#h_pw=cu.toHomo(n_pw)
+#h_pi=cu.toHomo(n_pcam)
+#pdb.set_trace()
+#r_pcam=np.dot(np.linalg.inv(norm_mat_cam),h_pi)
+h_pw=cu.toHomo(pw[:,inlier_idx])
+h_pi=cu.toHomo(pi[:,inlier_idx])
+lm_factor=0.000001
+#inv_k*H
+#pcam_invk=np.dot(norm_mat_cam,np.linalg.inv(k))
+#pcam_inv_k_h=np.dot(pcam_invk,H)
+#H_dot=np.dot(pcam_inv_k_h,np.linalg.inv(norm_mat_w))
+#
+
+opt_H=do_LM(h_pw[(0,2,3),:], h_pi, H,lm_factor)
+H=H/H[2,2]
+print("original_H \n", H)
+validateH(k,H)
+print("after optimization")
+opt_H=opt_H/opt_H[2,2]
+validateH(k,opt_H)
